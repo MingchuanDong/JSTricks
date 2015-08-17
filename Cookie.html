@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+			window.onload = function(){
+				var cookie = document.cookie;
+				document.getElementById("prev").innerHTML = cookie;
+				document.cookie = "Ming = rookie";
+				cookie = document.cookie;
+				document.getElementById("inserted").innerHTML = cookie;
+			}
+		</script>
+	</head>
+	<body>
+		<h1>This is a small program for you to retrieve the cookie with JS</h1>
+		<p id="prev"></p>
+		<p id="inserted"></p>
+	</body>
+</html>
