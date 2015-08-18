@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<script>
+			window.onload = function(){
+				var xhr;
+				try{
+					xhr = new ActiveXObject("Msxml2.XMLHTTP");
+					alert("You are using IE 7+!");
+
+				}catch(e){
+					try{
+						xhr = new ActiveXObject("Microsoft.XMLHTTP");
+						alert("You are using IE 7-!");
+					}catch(e){
+						try{
+							xhr = new XMLHttpRequest();
+							alert("You are using non-IE!");
+						}catch(e){
+							alert("Your browser does not support XHR!");
+						}
+					}
+				}
+			};
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
