@@ -2,18 +2,43 @@
 <html>
 	<head>
 		<script>
-			window.onload = function(){
-				var cookie = document.cookie;
-				document.getElementById("prev").innerHTML = cookie;
-				document.cookie = "Ming = rookie";
-				cookie = document.cookie;
-				document.getElementById("inserted").innerHTML = cookie;
+			function setCookie(){
+				var cookieName = document.getElementById("cookieName").value;
+				var cookieValue = document.getElementById("cookieValue").value;
+				var expTime = document.getElementById("expireTime").value;
+				expTime = Number.parseInt(expTime);
+				var exp = new Date();
+				exp.setTime(exp.getTime()+expTime*24*3600*1000);
+				document.cookie=cookieName+"="+cookieValue+";expire="+exp.toGMTString();
+			}
+			function getCookie(){
+				var cookieName = document.getElementById("cookieName").value;
+				var arr,var reg = new RegExp("(^|; )"+cookieName+"=([^;]*)(;|$)");
+				if(arr = document.cookie.match(reg)){
+					return unescape(arr[2]); //last remembered string after "="
+				}
+				else{
+					return null;
+				}
+			}
+			function delCookie(){
+				var cookieName = document.getElementById("cookieName").value;
+				var exp = new Date();
+				exp.setTime(exp.getTime()-1);
+				var cval = getCookie(cookieName);
+				if(cval!=null){
+					document.cookie = cookieName+"="+cval+";expire="+exp.toGMTString();
+				}
 			}
 		</script>
 	</head>
 	<body>
 		<h1>This is a small program for you to retrieve the cookie with JS</h1>
-		<p id="prev"></p>
-		<p id="inserted"></p>
+		<button onclick="setCookie()">setCookie</button>
+		<button onclick="getCookie()">getCookie</button>
+		<button onclick="delCookie()">deleteCookie</button><br><br>
+		<input type="text" id="cookieName" placeholder="please enter the cookie name" size=30><br><br>
+		<input type="text" id="cookieValue" placeholder="please enter the cookie value" size=30><br><br>
+		0<input type="range" id="expireTime" min="0" max="30">30 Cookie Expire Time (days)
 	</body>
 </html>
